@@ -249,6 +249,7 @@ tbody tr:last-child td { border-bottom: 0; }
 /* testproject: auth forms, users, notifications -- existing tokens only. */
 .auth-form, .modal-form { display: grid; gap: 12px; }
 .auth-link { font-size: 13px; justify-self: center; }
+.auth-footer { align-items: center; border-top: 1px solid hsl(var(--border)); display: flex; font-size: 13px; justify-content: space-between; padding-top: 12px; }
 .form-row { display: grid; gap: 12px; grid-template-columns: 1fr 1fr; }
 .form-field textarea { background: transparent; border: 1px solid hsl(var(--border)); border-radius: var(--radius); color: hsl(var(--foreground)); font: inherit; min-height: 96px; outline: none; padding: 8px 10px; resize: vertical; transition: border-color 0.15s ease; }
 .form-field textarea:focus { border-color: hsl(var(--primary)); }

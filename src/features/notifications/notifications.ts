@@ -85,7 +85,7 @@ export function useUnreadNotifications(orgId: string | undefined) {
   return useQuery({
     enabled: status === "authenticated",
     queryFn: async () => parseInbox(
-      await blocksClient.notifier.getNotifications({ isUnreadOnly: true, page: 1, pageSize: POLL_PAGE_SIZE }),
+      await blocksClient.notifier.getNotifications({ isUnreadOnly: true, page: 0, pageSize: POLL_PAGE_SIZE }),
       orgId
     ),
     queryKey: ["notifier", "unread", orgId],
@@ -95,12 +95,13 @@ export function useUnreadNotifications(orgId: string | undefined) {
   });
 }
 
+// `page` is the UI's 1-based page; the notifier pages from 0.
 export function useInbox(orgId: string | undefined, page: number, unreadOnly: boolean, pageSize = 20) {
   const { status } = useAuth();
   return useQuery({
     enabled: status === "authenticated",
     queryFn: async () => parseInbox(
-      await blocksClient.notifier.getNotifications({ isUnreadOnly: unreadOnly, page, pageSize, sortBy: "createdTime", sortDescending: true }),
+      await blocksClient.notifier.getNotifications({ isUnreadOnly: unreadOnly, page: page - 1, pageSize, sortBy: "createdTime", sortDescending: true }),
       orgId
     ),
     placeholderData: (previous) => previous,
